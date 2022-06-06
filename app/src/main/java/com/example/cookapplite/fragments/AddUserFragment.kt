@@ -56,7 +56,7 @@ class AddUserFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        auth = Firebase.auth-
+        auth = Firebase.auth
         createUserBtn.setOnClickListener {
             if (newEmailEditText.text.isEmpty()){
                 newEmailEditText.error = "Debe ingrear un email"
