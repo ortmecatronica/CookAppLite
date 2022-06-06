@@ -9,5 +9,14 @@
         android:id="@+id/loginFragment"
         android:name="com.example.cookapplite.fragments.LoginFragment"
         android:label="login_fragment"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.example.cookapplite.fragments.AddUserFragment"
+        android:label="add_user_fragment"
+        tools:layout="@layout/add_user_fragment" />
 </navigation>
