@@ -1,15 +1,18 @@
-package com.example.cookapplite
+package com.example.cookapplite.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
+import com.example.cookapplite.R
+import com.example.cookapplite.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlin.math.absoluteValue
 
 class LoginFragment : Fragment() {
 
@@ -44,10 +47,10 @@ class LoginFragment : Fragment() {
 
         loginBtn.setOnClickListener {
             if(state == 0){
-                editTextLogin.setText("")
+                editTextLogin.setText(null)
                 editTextLogin.clearFocus()
                 editTextLayout.hint = "pass"
-                state = 1
+                state++
             }
             else{
                 editTextLogin.setText("")

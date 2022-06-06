@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".fragments.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextLayout"
@@ -22,7 +22,7 @@
             android:id="@+id/editTextLogin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

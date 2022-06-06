@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "633033972356",
+    "project_id": "cookapplite",
+    "storage_bucket": "cookapplite.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633033972356:android:56c5363666c8a949c780d1",
+        "android_client_info": {
+          "package_name": "com.example.cookapplite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633033972356-01cot179gc7sg5cno3psnfoeq2e2ijth.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5hsosp-RCa0zwtA_ax_0_JYhRaVhgDcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633033972356-01cot179gc7sg5cno3psnfoeq2e2ijth.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

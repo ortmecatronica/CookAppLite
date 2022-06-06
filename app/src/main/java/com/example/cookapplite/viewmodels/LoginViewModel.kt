@@ -1,4 +1,4 @@
-package com.example.cookapplite
+package com.example.cookapplite.viewmodels
 
 import androidx.lifecycle.ViewModel
 
