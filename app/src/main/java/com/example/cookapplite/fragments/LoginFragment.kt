@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.findFragment
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.cookapplite.R
@@ -52,10 +55,14 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         var state = true
+        val action2 = LoginFragmentDirections.actionLoginFragmentToAppActivity()
 
         loginBtn.setOnClickListener {
             if(state){
-                if(emailEditText.text.isNotEmpty()) {
+                if(emailEditText.text.isEmpty()){
+                    emailEditText.error = "Debe ingresar un email"
+                }
+                else{
                     emailEditText.visibility = View.INVISIBLE
                     passEditText.visibility = View.VISIBLE
                     userMessage.visibility = View.INVISIBLE
@@ -63,25 +70,31 @@ class LoginFragment : Fragment() {
                     titleMessage.text = "Escribir contraseña"
                     state = !state
                 }
-                else{
-                    emailEditText.error = "Debe ingresar un email"
-                }
             }
             else{
-                if(passEditText.text.isNotEmpty()){
-                    //Firebase Auth
+                if(passEditText.text.isEmpty()){
+                    passEditText.error = "Debe ingresar un email"
                 }
                 else{
-                    passEditText.error = "Debe ingresar una contraseña"
+                    viewModel.email.value = emailEditText.text.toString()
+                    viewModel.pass.value = passEditText.text.toString()
+                    viewModel.authenticateUser()
                 }
             }
         }
+
         userMessage.setOnClickListener {
             //Navegar al fragment add user
-            val action = LoginFragmentDirections.actionLoginFragmentToAddUserFragment()
-            v.findNavController().navigate(action)
+            val action1 = LoginFragmentDirections.actionLoginFragmentToAddUserFragment()
+            v.findNavController().navigate(action1)
         }
 
+        viewModel.userAuth.observe(viewLifecycleOwner, Observer { result ->
+            when(result){
+                true -> v.findNavController().navigate(action2)
+                else -> Toast.makeText(requireContext(),"Error al logear", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

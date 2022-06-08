@@ -39,6 +39,7 @@ class AddUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.add_user_fragment, container, false)
+
         newEmailEditText = v.findViewById(R.id.newEmailEditText)
         newPassEditText = v.findViewById(R.id.newPasslEditText)
         newPhoneEditText = v.findViewById(R.id.newPhoneEditText)
@@ -71,23 +72,15 @@ class AddUserFragment : Fragment() {
                 newBirthdayEditText.error = "Debe ingresar su fecha de nacimiento"
             }
             else{
-                auth.createUserWithEmailAndPassword(newEmailEditText.text.toString(), newPassEditText.text.toString())
-                    .addOnCompleteListener(requireActivity()) { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(requireContext(),"Usuario creado",Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(requireContext(),"No se pudo crear el usuario",Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                /*viewModel.email.value = newEmailEditText.text.toString()
+                viewModel.email.value = newEmailEditText.text.toString()
                 viewModel.pass.value = newPassEditText.text.toString()
                 viewModel.phone.value = newPhoneEditText.text.toString()
                 viewModel.birthday.value = newBirthdayEditText.text.toString()
-                viewModel.createUser()*/
+                viewModel.createUser()
             }
         }
 
-        viewModel.navigate.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.signUp.observe(viewLifecycleOwner, Observer { result ->
             when (result){
                 true -> v.findNavController().popBackStack()
                 else -> Toast.makeText(requireContext(),"Error al crear el usuario",Toast.LENGTH_SHORT).show()

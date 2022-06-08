@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_loginFragment_to_addUserFragment"
             app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_appActivity"
+            app:destination="@id/appActivity" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.cookapplite.fragments.AddUserFragment"
         android:label="add_user_fragment"
         tools:layout="@layout/add_user_fragment" />
+    <activity
+        android:id="@+id/appActivity"
+        android:name="com.example.cookapplite.activities.AppActivity"
+        android:label="activity_app"
+        tools:layout="@layout/activity_app" />
 </navigation>
