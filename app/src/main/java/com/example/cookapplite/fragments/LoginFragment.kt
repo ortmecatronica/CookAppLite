@@ -31,8 +31,10 @@ class LoginFragment : Fragment() {
     private lateinit var passMessage : TextView
     private lateinit var userMessage : TextView
     private lateinit var titleMessage : TextView
+    private lateinit var emailMessage : TextView
     private lateinit var loginBtn : Button
-    private lateinit var auth : FirebaseAuth
+
+    var state = true
 
     companion object {
         fun newInstance() = LoginFragment()
@@ -43,18 +45,20 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.login_fragment, container, false)
+
         passEditText = v.findViewById(R.id.passEditText)
         emailEditText = v.findViewById(R.id.emailEditText)
         passMessage = v.findViewById(R.id.passMessage)
         userMessage = v.findViewById(R.id.userMessage)
         titleMessage = v.findViewById(R.id.titleMessage)
+        emailMessage = v.findViewById(R.id.emailMessage)
         loginBtn = v.findViewById(R.id.loginBtn)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
-        var state = true
         val action2 = LoginFragmentDirections.actionLoginFragmentToAppActivity()
 
         loginBtn.setOnClickListener {
@@ -63,20 +67,15 @@ class LoginFragment : Fragment() {
                     emailEditText.error = "Debe ingresar un email"
                 }
                 else{
-                    emailEditText.visibility = View.INVISIBLE
-                    passEditText.visibility = View.VISIBLE
-                    userMessage.visibility = View.INVISIBLE
-                    passMessage.visibility = View.VISIBLE
-                    titleMessage.text = "Escribir contraseña"
-                    state = !state
+                    viewModel.email.value = emailEditText.text.toString()
+                    viewModel.checkEmail()
                 }
             }
             else{
                 if(passEditText.text.isEmpty()){
-                    passEditText.error = "Debe ingresar un email"
+                    passEditText.error = "Debe ingresar una contraseña"
                 }
                 else{
-                    viewModel.email.value = emailEditText.text.toString()
                     viewModel.pass.value = passEditText.text.toString()
                     viewModel.authenticateUser()
                 }
@@ -89,12 +88,39 @@ class LoginFragment : Fragment() {
             v.findNavController().navigate(action1)
         }
 
-        viewModel.userAuth.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.authError.observe(viewLifecycleOwner, Observer { result ->
             when(result){
-                true -> v.findNavController().navigate(action2)
-                else -> Toast.makeText(requireContext(),"Error al logear", Toast.LENGTH_SHORT).show()
+                true -> passEditText.error = "Contraseña incorrecta"
+                else -> v.findNavController().navigate(action2)
             }
         })
+        viewModel.emailError.observe(viewLifecycleOwner,Observer{ result ->
+            when(result){
+                0 -> emailEditText.error = "Debe ingresar un email"
+                1 -> updateUI()
+                2 -> emailEditText.error = "El email no se encuentra registrado"
+            }
+        })
+    }
+
+    fun refreshUI(){
+        emailEditText.visibility = View.VISIBLE
+        passEditText.visibility = View.INVISIBLE
+        userMessage.visibility = View.VISIBLE
+        passMessage.visibility = View.INVISIBLE
+        titleMessage.text = "Iniciar sesión"
+        state = !state
+    }
+    fun updateUI(){
+        emailEditText.visibility = View.INVISIBLE
+        passEditText.visibility = View.VISIBLE
+        userMessage.visibility = View.INVISIBLE
+        passMessage.visibility = View.VISIBLE
+        emailMessage.text = emailEditText.text
+        emailMessage.visibility = View.VISIBLE
+
+        titleMessage.text = "Escribir contraseña"
+        state = !state
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

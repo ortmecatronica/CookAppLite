@@ -113,4 +113,18 @@
         app:layout_constraintBottom_toTopOf="@+id/emailEditText"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
+    <TextView
+        android:id="@+id/emailMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz18"
+        android:gravity="center|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/titleMessage"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
