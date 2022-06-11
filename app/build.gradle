@@ -9,6 +9,14 @@ plugins {
 android {
     compileSdk 32
 
+    buildFeatures{
+        viewBinding = true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.example.cookapplite"
         minSdk 21

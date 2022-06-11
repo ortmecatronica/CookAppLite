@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.cookapplite.R
+import com.example.cookapplite.databinding.AddUserFragmentBinding
+import com.example.cookapplite.databinding.LoginFragmentBinding
 import com.example.cookapplite.viewmodels.AddUserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -19,34 +21,22 @@ import com.google.firebase.ktx.Firebase
 
 class AddUserFragment : Fragment() {
 
-    private lateinit var v : View
-    private lateinit var newEmailEditText: EditText
-    private lateinit var newPassEditText:EditText
-    private lateinit var newBirthdayEditText: EditText
-    private lateinit var newPhoneEditText: EditText
-    private lateinit var createUserBtn : Button
+    private lateinit var _binding : AddUserFragmentBinding
+    private val binding get() = _binding!!
 
+    private lateinit var viewModel: AddUserViewModel
 
     companion object {
         fun newInstance() = AddUserFragment()
     }
 
-    private lateinit var viewModel: AddUserViewModel
-    private lateinit var auth : FirebaseAuth
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.add_user_fragment, container, false)
+        _binding = AddUserFragmentBinding.inflate(inflater, container, false)
 
-        newEmailEditText = v.findViewById(R.id.newEmailEditText)
-        newPassEditText = v.findViewById(R.id.newPasslEditText)
-        newPhoneEditText = v.findViewById(R.id.newPhoneEditText)
-        newBirthdayEditText = v.findViewById(R.id.newBirtdayEditText)
-        createUserBtn = v.findViewById(R.id.createUserBtn)
-
-        return v
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -57,32 +47,32 @@ class AddUserFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        auth = Firebase.auth
-        createUserBtn.setOnClickListener {
-            if (newEmailEditText.text.isEmpty()){
-                newEmailEditText.error = "Debe ingrear un email"
+
+        binding.createUserBtn.setOnClickListener {
+            if (binding.newEmailEditText.text.isEmpty()){
+                binding.newEmailEditText.error = "Debe ingrear un email"
             }
-            else if(newPassEditText.text.isEmpty()){
-                newPassEditText.error = "Debe ingresar una contraseña"
+            else if(binding.newPasslEditText .text.isEmpty()){
+                binding.newPasslEditText.error = "Debe ingresar una contraseña"
             }
-            else if(newPhoneEditText.text.isEmpty()){
-                newPhoneEditText.error = "Debe ingresar un teléfono"
+            else if(binding.newPhoneEditText.text.isEmpty()){
+                binding.newPhoneEditText.error = "Debe ingresar un teléfono"
             }
-            else if(newBirthdayEditText.text.isEmpty()){
-                newBirthdayEditText.error = "Debe ingresar su fecha de nacimiento"
+            else if(binding.newBirtdayEditText.text.isEmpty()){
+                binding.newBirtdayEditText.error = "Debe ingresar su fecha de nacimiento"
             }
             else{
-                viewModel.email.value = newEmailEditText.text.toString()
-                viewModel.pass.value = newPassEditText.text.toString()
-                viewModel.phone.value = newPhoneEditText.text.toString()
-                viewModel.birthday.value = newBirthdayEditText.text.toString()
+                viewModel.email.value = binding.newEmailEditText.text.toString()
+                viewModel.pass.value = binding.newPasslEditText.text.toString()
+                viewModel.phone.value = binding.newPhoneEditText.text.toString()
+                viewModel.birthday.value = binding.newBirtdayEditText.text.toString()
                 viewModel.createUser()
             }
         }
 
         viewModel.signUp.observe(viewLifecycleOwner, Observer { result ->
             when (result){
-                true -> v.findNavController().popBackStack()
+                true -> binding.root.findNavController().popBackStack()
                 else -> Toast.makeText(requireContext(),"Error al crear el usuario",Toast.LENGTH_SHORT).show()
             }
         })
