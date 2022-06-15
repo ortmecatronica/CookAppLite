@@ -35,7 +35,6 @@ class AddUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = AddUserFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 

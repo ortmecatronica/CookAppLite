@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val action2 = LoginFragmentDirections.actionLoginFragmentToAppActivity()
+        val action2 = LoginFragmentDirections.actionLoginFragmentToMainActivity()
 
         binding.loginBtn.setOnClickListener {
             if(state){
@@ -81,7 +81,7 @@ class LoginFragment : Fragment() {
                     setPositiveButton(
                         R.string.ok,
                         DialogInterface.OnClickListener { dialog, id ->
-                            // User clicked OK button
+                            viewModel.recoveryEmail()
                         })
                     setNegativeButton(R.string.cancel,
                         DialogInterface.OnClickListener { dialog, id ->
@@ -111,21 +111,23 @@ class LoginFragment : Fragment() {
         })
     }
 
-    fun refreshUI(){
+    private fun refreshUI(){
         binding.emailEditText.visibility = View.VISIBLE
         binding.passEditText.visibility = View.INVISIBLE
         binding.userMessage.visibility = View.VISIBLE
         binding.passMessage.visibility = View.INVISIBLE
+        binding.emailMessage.visibility = View.INVISIBLE
+
         binding.titleMessage.text = "Iniciar sesión"
         state = !state
     }
-    fun updateUI(){
+    private fun updateUI(){
         binding.emailEditText.visibility = View.INVISIBLE
         binding.passEditText.visibility = View.VISIBLE
         binding.userMessage.visibility = View.INVISIBLE
         binding.passMessage.visibility = View.VISIBLE
-        binding.emailMessage.text = binding.emailEditText.text
         binding.emailMessage.visibility = View.VISIBLE
+        binding.emailMessage.text = binding.emailEditText.text
 
         binding.titleMessage.text = "Escribir contraseña"
         state = !state

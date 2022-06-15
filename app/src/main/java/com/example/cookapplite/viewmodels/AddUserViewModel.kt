@@ -25,12 +25,7 @@ class AddUserViewModel : ViewModel() {
     fun createUser() {
         viewModelScope.launch {
             val result = signUpUser(email.value.toString(), pass.value.toString())
-            if(result != null){
-                signUp.value = true
-            }
-            else{
-                signUp.value = false
-            }
+            signUp.value = result != null
         }
     }
 

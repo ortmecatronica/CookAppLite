@@ -44,12 +44,24 @@ class LoginViewModel : ViewModel() {
     fun authenticateUser(){
         viewModelScope.launch {
             val result = checkUserAuthentication(email.value.toString(),pass.value.toString())
-            if (result != null){
-                authError.value = false
-            }
-            else{
-                authError.value = true
-            }
+            authError.value = result == null
+        }
+    }
+
+    fun recoveryEmail(){
+        viewModelScope.launch {
+            sendRecoveryEmail()
+        }
+    }
+
+    suspend fun sendRecoveryEmail(){
+        try {
+            auth
+                .sendPasswordResetEmail(email.value.toString())
+                .await()
+        }
+        catch (e :Exception){
+
         }
     }
 
