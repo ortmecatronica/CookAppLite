@@ -1,9 +1,7 @@
 package com.example.cookapplite.fragments
 
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,12 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.cookapplite.R
+import androidx.lifecycle.Observer
 import com.example.cookapplite.databinding.AddRecipeFragmentBinding
-import com.example.cookapplite.databinding.AddUserFragmentBinding
 import com.example.cookapplite.viewmodels.AddRecipeViewModel
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+
 
 class AddRecipeFragment : Fragment() {
 
@@ -26,8 +22,6 @@ class AddRecipeFragment : Fragment() {
 
     private lateinit var _binding : AddRecipeFragmentBinding
     private val binding get() = _binding!!
-
-    private var recipeImage :Uri? = null
 
     companion object {
         fun newInstance() = AddRecipeFragment()
@@ -49,8 +43,6 @@ class AddRecipeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val storage = Firebase.storage
-        val storageReference = storage.reference
 
         binding.pickImageBtn.setOnClickListener {
             //Gallery intent
@@ -59,22 +51,21 @@ class AddRecipeFragment : Fragment() {
         }
 
         binding.saveInStorageBtn.setOnClickListener {
-            //Storage image in database
-            val recipesImagesRef = storageReference.child("recipesImages/image1")
-            val uploadTask = recipesImagesRef.putFile(recipeImage!!)
-
-            uploadTask.addOnFailureListener {
-                Toast.makeText(requireContext(),"error",Toast.LENGTH_SHORT).show()
-            }.addOnSuccessListener { taskSnapshot ->
-                Toast.makeText(requireContext(),"uploaded",Toast.LENGTH_SHORT).show()
-            }
+            viewModel.storageImage()
         }
+
+        viewModel.resultStorage.observe(viewLifecycleOwner, Observer { result ->
+            when (result){
+                true -> Toast.makeText(requireContext(),"Imagen guardada con éxito",Toast.LENGTH_SHORT).show()
+                else -> Toast.makeText(requireContext(),"Error al guardar el archivo",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            recipeImage = result.data?.data
-            binding.imageView.setImageURI(recipeImage)
+            viewModel.image.value = result.data?.data
+            binding.imageView.setImageURI(result.data?.data)
         }
     }
 }

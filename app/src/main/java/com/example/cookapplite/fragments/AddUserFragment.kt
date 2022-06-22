@@ -48,23 +48,23 @@ class AddUserFragment : Fragment() {
         super.onStart()
 
         binding.createUserBtn.setOnClickListener {
-            if (binding.newEmailEditText.text.isEmpty()){
+            if (binding.newEmailEditText.text!!.isEmpty()){
                 binding.newEmailEditText.error = "Debe ingrear un email"
             }
-            else if(binding.newPasslEditText .text.isEmpty()){
-                binding.newPasslEditText.error = "Debe ingresar una contraseña"
+            else if(binding.newPassEditText.text!!.isEmpty()){
+                binding.newPassEditText.error = "Debe ingresar una contraseña"
             }
-            else if(binding.newPhoneEditText.text.isEmpty()){
+            else if(binding.newPhoneEditText.text!!.isEmpty()){
                 binding.newPhoneEditText.error = "Debe ingresar un teléfono"
             }
-            else if(binding.newBirtdayEditText.text.isEmpty()){
-                binding.newBirtdayEditText.error = "Debe ingresar su fecha de nacimiento"
+            else if(binding.newBirthDayEditText.text!!.isEmpty()){
+                binding.newBirthDayEditText.error = "Debe ingresar su fecha de nacimiento"
             }
             else{
                 viewModel.email.value = binding.newEmailEditText.text.toString()
-                viewModel.pass.value = binding.newPasslEditText.text.toString()
+                viewModel.pass.value = binding.newPassEditText.text.toString()
                 viewModel.phone.value = binding.newPhoneEditText.text.toString()
-                viewModel.birthday.value = binding.newBirtdayEditText.text.toString()
+                viewModel.birthday.value = binding.newBirthDayEditText.text.toString()
                 viewModel.createUser()
             }
         }
