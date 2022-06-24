@@ -1,19 +1,21 @@
-package com.example.cookapplite.viewmodels
+package com.example.cookapplite.UserFeature.ui.viewmodel
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class AddUserViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+@HiltViewModel
+class AddUserViewModel @Inject constructor(
+) : ViewModel() {
+
     private  var auth = Firebase.auth
 
     val email = MutableLiveData<String>()

@@ -1,4 +1,4 @@
-package com.example.cookapplite.fragments
+package com.example.cookapplite.UserFeature.ui.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,42 +6,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import com.example.cookapplite.R
 import com.example.cookapplite.databinding.AddUserFragmentBinding
-import com.example.cookapplite.databinding.LoginFragmentBinding
-import com.example.cookapplite.viewmodels.AddUserViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.example.cookapplite.UserFeature.ui.viewmodel.AddUserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddUserFragment : Fragment() {
-
-    private lateinit var _binding : AddUserFragmentBinding
-    private val binding get() = _binding!!
-
-    private lateinit var viewModel: AddUserViewModel
 
     companion object {
         fun newInstance() = AddUserFragment()
     }
 
+    private lateinit var binding : AddUserFragmentBinding
+    private lateinit var viewModel: AddUserViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = AddUserFragmentBinding.inflate(inflater, container, false)
+        binding = AddUserFragmentBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddUserViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onStart() {

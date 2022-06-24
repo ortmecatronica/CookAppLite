@@ -1,6 +1,7 @@
-package com.example.cookapplite.viewmodels
+package com.example.cookapplite.UserFeature.ui.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,18 +9,24 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.SignInMethodQueryResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
-import kotlin.math.sign
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+): ViewModel() {
 
     private var auth = Firebase.auth
     val email = MutableLiveData<String>()
     val pass = MutableLiveData<String>()
     val authError = MutableLiveData<Boolean>()
     val emailError = MutableLiveData<Int>()
+
+    private val _navigate = MutableLiveData<Int>()
+    val navigate : LiveData<Int> get() = _navigate
 
     fun checkEmail(){
         viewModelScope.launch {
@@ -89,6 +96,12 @@ class LoginViewModel : ViewModel() {
             Log.e("LoginUserViewModel", "Exception caught: ${e.message}")
             return null
         }
+    }
+    fun GoToAddUser(){
+        _navigate.value = 1
+    }
+    fun GoToRecipeList(){
+        _navigate.value = 2
     }
 
 }
