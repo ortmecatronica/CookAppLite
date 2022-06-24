@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CookAppLite">
 
         <activity
-            android:name=".UserFeature.LoginActivity"
+            android:name=".LoginFeature.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

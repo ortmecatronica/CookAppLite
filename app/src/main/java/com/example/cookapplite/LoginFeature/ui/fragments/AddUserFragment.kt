@@ -1,6 +1,5 @@
-package com.example.cookapplite.UserFeature.ui.fragments
+package com.example.cookapplite.LoginFeature.ui.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.cookapplite.databinding.AddUserFragmentBinding
-import com.example.cookapplite.UserFeature.ui.viewmodel.AddUserViewModel
+import com.example.cookapplite.LoginFeature.ui.viewmodel.AddUserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

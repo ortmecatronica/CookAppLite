@@ -1,9 +1,8 @@
-package com.example.cookapplite.UserFeature
+package com.example.cookapplite.LoginFeature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cookapplite.R
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

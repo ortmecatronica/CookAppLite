@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserFeature.ui.fragments.AddUserFragment">
+    tools:context=".LoginFeature.ui.fragments.AddUserFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/view2"
