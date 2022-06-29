@@ -12,7 +12,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:elevation="12dp"
         app:cardCornerRadius="75dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/newEmailEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -120,7 +120,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/newPassEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +134,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/newBirthDayEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -148,7 +148,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/newPhoneEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 

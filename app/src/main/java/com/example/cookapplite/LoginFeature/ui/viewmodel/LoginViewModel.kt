@@ -14,16 +14,12 @@ class LoginViewModel @Inject constructor(
     val loginUser : LoginUser
 ): ViewModel() {
 
-    private val _login = MutableLiveData<Boolean>()
-    val login : LiveData<Boolean> get() = _login
+    private val _login = MutableLiveData<Boolean?>()
+    val login : LiveData<Boolean?> get() = _login
 
     fun loginUsers(email : String,pass : String){
         viewModelScope.launch {
-            val result = loginUser(email,pass)
-            when(result){
-                true -> _login.value = true
-                false -> _login.value = false
-            }
+            _login.value = loginUser(email,pass)
         }
     }
 

@@ -11,16 +11,19 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
 
     val db = Firebase.firestore
 
-    override suspend fun addUser(user: User) {
+    override suspend fun addUser(newUser: User) : Boolean{
+        var result : Boolean
         try {
             db
                 .collection("Users")
-                .document(user.uuid)
-                .set(user)
+                .document(newUser.uuid.toString())
+                .set(newUser)
+            result = true
         }
         catch (e : Exception){
-
+            result = false
         }
+        return result
     }
 
     override suspend fun getUsers(): List<User> {

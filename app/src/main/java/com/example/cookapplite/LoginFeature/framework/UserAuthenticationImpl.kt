@@ -23,10 +23,11 @@ class UserAuthenticationImpl @Inject constructor() : UserAuthentication {
         catch (e : Exception){
             Log.e("LoginUserViewModel", "Exception caught: ${e.message}")
         }
-        return true
+        return result?.user != null
+
     }
 
-    override suspend fun createUser(email: String, pass: String) : Boolean {
+    override suspend fun createUser(email: String, pass: String) : String? {
         var result :AuthResult? = null
         try{
             result = auth
@@ -35,7 +36,7 @@ class UserAuthenticationImpl @Inject constructor() : UserAuthentication {
         }catch (e : Exception){
             Log.e("AddUserViewModel", "Exception caught: ${e.message}")
         }
-        return result != null
+        return result?.user?.uid
     }
 
     override suspend fun sendRecoveryEmail(email: String) {

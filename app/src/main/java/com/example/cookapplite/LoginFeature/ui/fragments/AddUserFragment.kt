@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import com.example.cookapplite.LoginFeature.domain.User
 import com.example.cookapplite.databinding.AddUserFragmentBinding
 import com.example.cookapplite.LoginFeature.ui.viewmodel.AddUserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,13 +37,25 @@ class AddUserFragment : Fragment() {
         setObservers()
 
         binding.signUpBtn.setOnClickListener {
-            viewModel.createNewUser(binding.newEmailEditText.text.toString(), binding.newPassEditText.text.toString())
+            val newUser =
+                User(null,
+                    null,
+                    binding.newEmailEditText.toString(),
+                    binding.newPhoneEditText.toString(),
+                    binding.newBirthDayEditText.toString()
+                )
+            viewModel.createNewUser(newUser, binding.newPassEditText.toString())
         }
 
     }
 
     private fun setObservers(){
-
+        viewModel.create.observe(viewLifecycleOwner, Observer { result ->
+            when(result){
+                true -> Toast.makeText(requireContext(),"Usuario creado", Toast.LENGTH_SHORT).show()
+                false -> Toast.makeText(requireContext(),"Falla al crear usuario", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
 
