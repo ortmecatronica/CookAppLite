@@ -12,23 +12,5 @@ import javax.inject.Inject
 class AddRecipeViewModel @Inject constructor(
 ) : ViewModel() {
 
-    val image = MutableLiveData<Uri>()
-    val resultStorage = MutableLiveData<Boolean>()
-
-    val storage = Firebase.storage
-    val storageReference = storage.reference
-
-    fun storageImage() {
-        val recipesImagesRef = storageReference.child("recipesImages/image1")
-        val uploadTask = recipesImagesRef.putFile(image.value!!)
-
-        uploadTask.addOnFailureListener {
-            resultStorage.value = false
-        }.addOnSuccessListener { taskSnapshot ->
-            resultStorage.value = true
-        }
-    }
-
-
 }
 

@@ -41,23 +41,12 @@ class AddRecipeFragment : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             resultLauncher.launch(gallery)
         }
-
-        binding.saveInStorageBtn.setOnClickListener {
-            viewModel.storageImage()
-        }
-
-        viewModel.resultStorage.observe(viewLifecycleOwner, Observer { result ->
-            when (result){
-                true -> Toast.makeText(requireContext(),"Imagen guardada con éxito",Toast.LENGTH_SHORT).show()
-                else -> Toast.makeText(requireContext(),"Error al guardar el archivo",Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            viewModel.image.value = result.data?.data
-            binding.imageView.setImageURI(result.data?.data)
+            //viewModel.image.value = result.data?.data
+            //binding.imageView.setImageURI(result.data?.data)
         }
     }
 }

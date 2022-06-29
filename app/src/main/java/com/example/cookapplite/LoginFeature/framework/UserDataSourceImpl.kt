@@ -24,7 +24,6 @@ class UserDataSourceImpl @Inject constructor() : UserDataSource {
     }
 
     override suspend fun getUsers(): List<User> {
-
         return emptyList()
     }
 

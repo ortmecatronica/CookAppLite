@@ -30,7 +30,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/addUserMessage"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Create new user"
@@ -60,7 +60,7 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <Button
-        android:id="@+id/createUserBtn"
+        android:id="@+id/signUpBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="signup"
@@ -75,7 +75,7 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/pickProfileImageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"

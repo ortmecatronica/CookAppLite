@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.cookapplite.databinding.AddUserFragmentBinding
@@ -19,8 +20,8 @@ class AddUserFragment : Fragment() {
         fun newInstance() = AddUserFragment()
     }
 
+    private val viewModel: AddUserViewModel by viewModels()
     private lateinit var binding : AddUserFragmentBinding
-    private lateinit var viewModel: AddUserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,36 +33,16 @@ class AddUserFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        setObservers()
 
-        binding.createUserBtn.setOnClickListener {
-            if (binding.newEmailEditText.text!!.isEmpty()){
-                binding.newEmailEditText.error = "Debe ingrear un email"
-            }
-            else if(binding.newPassEditText.text!!.isEmpty()){
-                binding.newPassEditText.error = "Debe ingresar una contraseña"
-            }
-            else if(binding.newPhoneEditText.text!!.isEmpty()){
-                binding.newPhoneEditText.error = "Debe ingresar un teléfono"
-            }
-            else if(binding.newBirthDayEditText.text!!.isEmpty()){
-                binding.newBirthDayEditText.error = "Debe ingresar su fecha de nacimiento"
-            }
-            else{
-                viewModel.email.value = binding.newEmailEditText.text.toString()
-                viewModel.pass.value = binding.newPassEditText.text.toString()
-                viewModel.phone.value = binding.newPhoneEditText.text.toString()
-                viewModel.birthday.value = binding.newBirthDayEditText.text.toString()
-                viewModel.createUser()
-            }
+        binding.signUpBtn.setOnClickListener {
+            viewModel.createNewUser(binding.newEmailEditText.text.toString(), binding.newPassEditText.text.toString())
         }
-
-        viewModel.signUp.observe(viewLifecycleOwner, Observer { result ->
-            when (result){
-                true -> binding.root.findNavController().popBackStack()
-                else -> Toast.makeText(requireContext(),"Error al crear el usuario",Toast.LENGTH_SHORT).show()
-            }
-        })
 
     }
 
+    private fun setObservers(){
+
+    }
 }
+
