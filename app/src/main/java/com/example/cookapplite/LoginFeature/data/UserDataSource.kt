@@ -1,4 +1,4 @@
-package com.example.cookapplite.LoginFeature.manager
+package com.example.cookapplite.LoginFeature.data
 
 import com.example.cookapplite.LoginFeature.domain.User
 

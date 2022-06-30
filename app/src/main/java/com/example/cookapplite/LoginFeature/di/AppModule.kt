@@ -3,9 +3,8 @@ package com.example.cookapplite.LoginFeature.di
 import com.example.cookapplite.LoginFeature.data.UsersRepository
 import com.example.cookapplite.LoginFeature.framework.UserAuthenticationImpl
 import com.example.cookapplite.LoginFeature.framework.UserDataSourceImpl
-import com.example.cookapplite.LoginFeature.manager.UserAuthentication
-import com.example.cookapplite.LoginFeature.manager.UserDataSource
-import com.example.cookapplite.LoginFeature.ui.fragments.LoginFragment
+import com.example.cookapplite.LoginFeature.data.UserAuthentication
+import com.example.cookapplite.LoginFeature.data.UserDataSource
 import com.example.cookapplite.LoginFeature.ui.viewmodel.AddUserViewModel
 import com.example.cookapplite.LoginFeature.ui.viewmodel.LoginViewModel
 import com.example.cookapplite.LoginFeature.usecases.CreateUser

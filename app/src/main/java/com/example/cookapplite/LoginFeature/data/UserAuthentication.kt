@@ -1,4 +1,4 @@
-package com.example.cookapplite.LoginFeature.manager
+package com.example.cookapplite.LoginFeature.data
 
 interface UserAuthentication {
     suspend fun login(email : String, pass : String) : Boolean

@@ -1,7 +1,7 @@
 package com.example.cookapplite.LoginFeature.framework
 
 import android.util.Log
-import com.example.cookapplite.LoginFeature.manager.UserAuthentication
+import com.example.cookapplite.LoginFeature.data.UserAuthentication
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,12 +19,13 @@ class UserAuthenticationImpl @Inject constructor() : UserAuthentication {
             result= auth
                 .signInWithEmailAndPassword(email,pass)
                 .await()
+            return true
         }
         catch (e : Exception){
             Log.e("LoginUserViewModel", "Exception caught: ${e.message}")
+            return false
         }
-        return result?.user != null
-
+      //  return result?.user != null
     }
 
     override suspend fun createUser(email: String, pass: String) : String? {
@@ -36,6 +37,7 @@ class UserAuthenticationImpl @Inject constructor() : UserAuthentication {
         }catch (e : Exception){
             Log.e("AddUserViewModel", "Exception caught: ${e.message}")
         }
+
         return result?.user?.uid
     }
 

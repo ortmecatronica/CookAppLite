@@ -40,11 +40,11 @@ class AddUserFragment : Fragment() {
             val newUser =
                 User(null,
                     null,
-                    binding.newEmailEditText.toString(),
-                    binding.newPhoneEditText.toString(),
-                    binding.newBirthDayEditText.toString()
+                    binding.newEmailEditText.text.toString(),
+                    binding.newPhoneEditText.text.toString(),
+                    binding.newBirthDayEditText.text.toString()
                 )
-            viewModel.createNewUser(newUser, binding.newPassEditText.toString())
+            viewModel.createNewUser(newUser, binding.newPassEditText.text.toString())
         }
 
     }
