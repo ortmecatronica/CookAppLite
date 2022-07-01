@@ -4,7 +4,8 @@ import com.example.cookapplite.LoginFeature.domain.User
 
 class UsersRepository  constructor(
     private val userAuthentication : UserAuthentication,
-    private val userDataSource: UserDataSource
+    private val userDataSource: UserDataSource,
+    private val userStorageData: UserStorageData
 )
 {
     suspend fun createUser(newUser : User, pass : String) : Boolean{
@@ -14,6 +15,7 @@ class UsersRepository  constructor(
         } else{
             newUser.uuid = newUid
             userDataSource.addUser(newUser)
+            userStorageData.addProfileImage(newUser.profileImage)
             true
         }
     }
@@ -22,7 +24,4 @@ class UsersRepository  constructor(
         return userAuthentication.login(email, pass)
     }
 
-    suspend fun saveUserInfo(newUser : User) : Boolean{
-        return true
-    }
 }
